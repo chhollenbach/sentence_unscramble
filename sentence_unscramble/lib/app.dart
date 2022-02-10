@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       title: 'Sentence Unscrambler',
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
-        scaffoldBackgroundColor: Colors.lightGreen.shade100 
+        scaffoldBackgroundColor: Colors.lightGreen.shade50 
         ),
       home: const LandingPage()
     );
