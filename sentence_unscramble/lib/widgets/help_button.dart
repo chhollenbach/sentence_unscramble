@@ -20,7 +20,7 @@ class _HelpButtonState extends State<HelpButton> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              content: Text(widget.helperText),
+              content: Text(widget.helperText)
             );
           },
         );

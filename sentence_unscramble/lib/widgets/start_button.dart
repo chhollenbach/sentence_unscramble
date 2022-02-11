@@ -14,6 +14,7 @@ class StartButton extends StatelessWidget {
       padding: EdgeInsets.all(30),
       child: ElevatedButton(
         onPressed: () {
+          // navigates to game screen route
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => GameScreen(displayHint: displayHint, swapCount: swapCount,))

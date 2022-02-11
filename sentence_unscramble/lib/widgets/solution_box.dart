@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SolutionBox extends StatefulWidget {
-  const SolutionBox({ Key? key , required this.word, this.displayHint = true}) : super(key: key);
+  const SolutionBox({ Key? key , required this.word, this.displayHint = true, required this.callbackFunctionIncrement, required this.callbackFunctionWinCond}) : super(key: key);
 
   final String word;
   final bool displayHint;
+  final Function callbackFunctionIncrement;
+  final Function callbackFunctionWinCond;
 
   @override
   _SolutionBoxState createState() => _SolutionBoxState();
@@ -38,9 +40,11 @@ class _SolutionBoxState extends State<SolutionBox> {
             );
           },
           onAccept: (word) {
+            widget.callbackFunctionIncrement();
             if (word==widget.word){
               setState(() {
                 correctMove = true;
+                widget.callbackFunctionWinCond();
               });
             }
           },

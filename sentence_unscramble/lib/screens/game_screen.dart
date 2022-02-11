@@ -14,13 +14,43 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  int _moveCounter = 0;
+  // variables representing how many moves and how many correct moves have been made
+  int moveCounter = 0;
+  int winCond = 0;
+
   final List<String> solutionSentence = ['the', 'big', 'dog', 'ran', 'very', 'fast']; // This will be dynamic based on input from previous screen in final version
   late List<String> scrambledSentence = scramble(solutionSentence, widget.swapCount); 
 
-  void _incrementCounter() {
+  // callback functions used to retrieve data from children widgets and update gamestate
+  void incrementCounter() {
     setState(() {
-      _moveCounter++;
+      moveCounter++;
+    });
+  }
+
+  void incrementWinCond() {
+    setState(() {
+      winCond++;
+      if(winCond == solutionSentence.length){
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text('Congrats! You won in $moveCounter moves. Please play again!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // need to pop twice to exit pop screen and leave game
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    }, 
+                  child: Text("Main Menu")
+                  )
+              ]
+            );
+          },
+        );
+      }
     });
   }
 
@@ -43,13 +73,13 @@ class _GameScreenState extends State<GameScreen> {
                 child: Wrap(
                   children: [
                     for (var word in solutionSentence) 
-                      SolutionBox(word: word, displayHint: widget.displayHint)
+                      SolutionBox(word: word, displayHint: widget.displayHint, callbackFunctionIncrement: incrementCounter, callbackFunctionWinCond: incrementWinCond)
                   ]
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Text('$_moveCounter moves', style: TextStyle(fontSize: 30),),
+                child: Text('$moveCounter moves', style: TextStyle(fontSize: 30),),
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
@@ -68,6 +98,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 }
 
+// function used to scramble sentence coming from microservice
 List<String> scramble(List<String> unscrambledSentence, int swaps) {
   final _random = Random();
 

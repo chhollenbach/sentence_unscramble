@@ -12,12 +12,12 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  // three state variables representing game options
   bool displayHint = false;
-
   int swapCount = 0;
-
   int wordCount = 6;
 
+  // callback functions that are used to retrieve data from children widgets
   callbackDisplayHint(bool displayHintBool) {
     setState(() {
       displayHint = displayHintBool;

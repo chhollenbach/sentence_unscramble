@@ -10,6 +10,8 @@ class ScrambledWordBox extends StatefulWidget {
 }
 
 class _ScrambledWordBoxState extends State<ScrambledWordBox> {
+  bool displaySelf = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,10 +19,21 @@ class _ScrambledWordBoxState extends State<ScrambledWordBox> {
       child: Draggable(
         child: Card(
           elevation: 15,
-          child: SizedBox(
-            width: 70,
-            height: 45,
-            child: Center(child: Text(widget.word, style: TextStyle(fontSize: 20),)),
+          child: Column(
+            children: [
+              if (displaySelf)
+              SizedBox(
+                width: 70,
+                height: 45,
+                child: Center(child: Text(widget.word, style: TextStyle(fontSize: 20)))
+              ),
+              if (!displaySelf)
+              Container(
+                width: 70,
+                height: 45,
+                color: Colors.black,
+              )
+            ],
           ),
         ),
         feedback: Card(
