@@ -4,8 +4,37 @@ import '../widgets/text_option.dart';
 import '../widgets/help_button.dart';
 import '../widgets/start_button.dart';
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({ Key? key }) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({ Key? key}) : super(key: key);
+
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  bool displayHint = false;
+
+  int swapCount = 0;
+
+  int wordCount = 6;
+
+  callbackDisplayHint(bool displayHintBool) {
+    setState(() {
+      displayHint = displayHintBool;
+    });
+  }
+
+  callbackSwapCount(int swapCountInt) {
+    setState(() {
+      swapCount = swapCountInt;
+    });
+  }
+
+  callbackSentenceWordCount(int wordCountInt) {
+    setState(() {
+      wordCount = wordCountInt;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +52,7 @@ class LandingPage extends StatelessWidget {
             Text('Game Options', style: TextStyle(fontSize: 30)),
             Row(
               children: [
-                ToggleOption(helperText: 'Easy Mode - Letter Count Hints'),
+                ToggleOption(helperText: 'Easy Mode - Letter Count Hints', callbackFunction: callbackDisplayHint),
                 Spacer(),
                 HelpButton(
                   helperText: 'Toggle this option to display the letter count of the correct word for each blank space in the solution.',
@@ -33,7 +62,7 @@ class LandingPage extends StatelessWidget {
             ),
             Row(
               children: [
-                TextOption(helperText: 'Number of Words'),
+                TextOption(helperText: 'Number of Words', callbackFunction: callbackSentenceWordCount),
                 Spacer(),
                 HelpButton(
                   helperText: 'This sets the size of the sentence that will be scrambled. Maximum of N words.',
@@ -43,7 +72,7 @@ class LandingPage extends StatelessWidget {
             ),
             Row(
               children: [
-                TextOption(helperText: 'Number of Word Pairs Swapped'),
+                TextOption(helperText: 'Number of Word Pairs Swapped', callbackFunction: callbackSwapCount),
                 Spacer(),
                 HelpButton(
                   helperText: 'This sets the number of swaps/scrambles that will occur in the sentence. More swaps means more randomization.',
@@ -51,7 +80,7 @@ class LandingPage extends StatelessWidget {
                 )
               ]
             ),
-            StartButton(displayHint: true, swapCount: 1)
+            StartButton(displayHint: displayHint, swapCount: swapCount)
           ]
           )
         ) 
