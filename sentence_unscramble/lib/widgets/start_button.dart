@@ -3,7 +3,10 @@ import 'package:sentence_unscramble/screens/game_screen.dart';
 import '../screens/game_screen.dart';
 
 class StartButton extends StatelessWidget {
-  const StartButton({ Key? key }) : super(key: key);
+  const StartButton({ Key? key, required this.displayHint, required this.swapCount}) : super(key: key);
+
+  final bool displayHint;
+  final int swapCount;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class StartButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const GameScreen())
+            MaterialPageRoute(builder: (context) => GameScreen(displayHint: displayHint, swapCount: swapCount,))
           );
         },
         child: Text('Start', style: TextStyle(fontSize: 50))

@@ -10,7 +10,7 @@ class TextOption extends StatefulWidget {
 }
 
 class _ToggleOptionState extends State<TextOption> {
-  final _textController = TextEditingController();
+  final _textController = TextEditingController(text: '6');
 
   @override
   Widget build(BuildContext context) {

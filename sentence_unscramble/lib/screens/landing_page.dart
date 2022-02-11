@@ -33,21 +33,11 @@ class LandingPage extends StatelessWidget {
             ),
             Row(
               children: [
-                ToggleOption(helperText: 'Easy Mode - Undo Button'),
-                Spacer(),
-                HelpButton(
-                  helperText: 'Toggle this option to allow the ability to undo a move. Otherwise, all moves are final.',
-                  tagNum: "a2"
-                )
-              ]
-            ),
-            Row(
-              children: [
                 TextOption(helperText: 'Number of Words'),
                 Spacer(),
                 HelpButton(
                   helperText: 'This sets the size of the sentence that will be scrambled. Maximum of N words.',
-                  tagNum: "a3"
+                  tagNum: "a2"
                 )
               ]
             ),
@@ -57,11 +47,11 @@ class LandingPage extends StatelessWidget {
                 Spacer(),
                 HelpButton(
                   helperText: 'This sets the number of swaps/scrambles that will occur in the sentence. More swaps means more randomization.',
-                  tagNum: "a4",
+                  tagNum: "a3",
                 )
               ]
             ),
-            StartButton()
+            StartButton(displayHint: true, swapCount: 1)
           ]
           )
         ) 
