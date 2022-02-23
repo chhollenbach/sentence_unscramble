@@ -56,7 +56,10 @@ class _SolutionBoxState extends State<SolutionBox> {
 
 Widget displayCorrectWord(bool correctChoice, String word) {
   if (correctChoice) {
-    return Center(child: Text(word, style: TextStyle(fontSize: 20)));
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(word, style: TextStyle(fontSize: 30),)
+    );
   } else {
     return Center(child: Text('', style: TextStyle(fontSize: 20)));
   }

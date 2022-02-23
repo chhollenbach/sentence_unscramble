@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sentence_unscramble/widgets/scrambled_word_box.dart';
 import 'package:sentence_unscramble/widgets/solution_box.dart';
 import 'dart:math';
+import 'package:http/http.dart'  as http;
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({ Key? key , required this.displayHint, required this.swapCount}) : super(key: key);
+  const GameScreen({ Key? key , required this.displayHint, required this.swapCount, required this.wordCount}) : super(key: key);
 
   final bool displayHint;
   final int swapCount;
+  final int wordCount;
 
   @override
   _GameScreenState createState() => _GameScreenState();
@@ -18,14 +20,36 @@ class _GameScreenState extends State<GameScreen> {
   int moveCounter = 0;
   int winCond = 0;
 
-  final List<String> solutionSentence = ['the', 'big', 'dog', 'ran', 'very', 'fast']; // This will be dynamic based on input from previous screen in final version
-  late List<String> scrambledSentence = scramble(solutionSentence, widget.swapCount); 
+  late List<String> solutionSentence = []; 
+  late List<String> scrambledSentence = []; 
+
+  @override
+  void initState() {
+    super.initState();
+    setSentences(widget.wordCount);
+  }
 
   // callback functions used to retrieve data from children widgets and update gamestate
   void incrementCounter() {
     setState(() {
       moveCounter++;
     });
+  }
+
+
+  void setSentences(wordCount) async {
+    String url = 'http://10.0.2.2:3000/sentence/' + wordCount.toString();
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      List<String >finalSentence = response.body.toLowerCase().split(' ');
+      setState(() {
+        solutionSentence = finalSentence;
+        scrambledSentence = scramble(solutionSentence, widget.swapCount);
+      });
+    } else {
+      throw Exception('Unable to connect to server');
+    }
+
   }
 
   void incrementWinCond() {
@@ -70,11 +94,13 @@ class _GameScreenState extends State<GameScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Wrap(
-                  children: [
-                    for (var word in solutionSentence) 
-                      SolutionBox(word: word, displayHint: widget.displayHint, callbackFunctionIncrement: incrementCounter, callbackFunctionWinCond: incrementWinCond)
-                  ]
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    children: [
+                      for (var word in solutionSentence) 
+                        SolutionBox(word: word, displayHint: widget.displayHint, callbackFunctionIncrement: incrementCounter, callbackFunctionWinCond: incrementWinCond)
+                    ]
+                  ),
                 ),
               ),
               Padding(
@@ -83,11 +109,13 @@ class _GameScreenState extends State<GameScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(15),
-                child: Wrap(
-                  children: [
-                    for (var word in scrambledSentence)
-                      ScrambledWordBox(word: word)
-                  ],
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    children: [
+                      for (var word in scrambledSentence)
+                        ScrambledWordBox(word: word)
+                    ],
+                  ),
                 ),
               )
             ]

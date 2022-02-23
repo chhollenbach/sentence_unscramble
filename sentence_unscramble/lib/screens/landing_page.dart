@@ -65,7 +65,7 @@ class _LandingPageState extends State<LandingPage> {
                 TextOption(helperText: 'Number of Words', callbackFunction: callbackSentenceWordCount),
                 Spacer(),
                 HelpButton(
-                  helperText: 'This sets the size of the sentence that will be scrambled. Maximum of N words.',
+                  helperText: 'This sets the size of the sentence that will be scrambled. Maximum of 20 words, minimum of 4 words.',
                   tagNum: "a2"
                 )
               ]
@@ -75,12 +75,12 @@ class _LandingPageState extends State<LandingPage> {
                 TextOption(helperText: 'Number of Word Pairs Swapped', callbackFunction: callbackSwapCount),
                 Spacer(),
                 HelpButton(
-                  helperText: 'This sets the number of swaps/scrambles that will occur in the sentence. More swaps means more randomization.',
+                  helperText: 'This sets the number of swaps/scrambles that will occur in the sentence. More swaps means more randomization, but anything move half the word count might end up swapping words back into their correct position.',
                   tagNum: "a3",
                 )
               ]
             ),
-            StartButton(displayHint: displayHint, swapCount: swapCount)
+            StartButton(displayHint: displayHint, swapCount: swapCount, wordCount: wordCount)
           ]
           )
         ) 

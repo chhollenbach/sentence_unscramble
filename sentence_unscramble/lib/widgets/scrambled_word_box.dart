@@ -25,7 +25,10 @@ class _ScrambledWordBoxState extends State<ScrambledWordBox> {
               SizedBox(
                 width: 70,
                 height: 45,
-                child: Center(child: Text(widget.word, style: TextStyle(fontSize: 20)))
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(widget.word, style: TextStyle(fontSize: 30),)
+                )
               ),
               if (!displaySelf)
               Container(
@@ -41,7 +44,10 @@ class _ScrambledWordBoxState extends State<ScrambledWordBox> {
           child: SizedBox(
             width: 70,
             height: 45,
-            child: Center(child: Text(widget.word)),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+                  child: Text(widget.word, style: TextStyle(fontSize: 30),)
+            )
           ),
         ),
         data: widget.word,
