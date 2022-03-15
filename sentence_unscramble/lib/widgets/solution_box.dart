@@ -12,6 +12,8 @@ class SolutionBox extends StatefulWidget {
   _SolutionBoxState createState() => _SolutionBoxState();
 }
 
+// main build widget - represents that initially blacked out box at the top of the game screen where users
+// drag words to during the game
 class _SolutionBoxState extends State<SolutionBox> {
   bool correctMove = false;
 
@@ -54,6 +56,8 @@ class _SolutionBoxState extends State<SolutionBox> {
   }
 }
 
+// helper function to transform blacked out box to show the word after user
+// guesses correctly
 Widget displayCorrectWord(bool correctChoice, String word) {
   if (correctChoice) {
     return FittedBox(

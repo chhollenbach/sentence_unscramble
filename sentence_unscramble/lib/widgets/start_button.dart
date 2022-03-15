@@ -9,6 +9,7 @@ class StartButton extends StatelessWidget {
   final int swapCount;
   final int wordCount;
 
+  // widget to start game - found on landing page
   @override
   Widget build(BuildContext context) {
     return Container(

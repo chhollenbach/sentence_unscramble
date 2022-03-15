@@ -13,6 +13,7 @@ class ToggleOption extends StatefulWidget {
 class _ToggleOptionState extends State<ToggleOption> {
   bool _switchVal = false;
 
+  // main build widget - toggle found on landing page
   @override
   Widget build(BuildContext context) {
     return Container(

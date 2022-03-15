@@ -10,6 +10,7 @@ class HelpButton extends StatefulWidget {
   State<HelpButton> createState() => _HelpButtonState();
 }
 
+// help button widget to display info about game option
 class _HelpButtonState extends State<HelpButton> {
   @override
   Widget build(BuildContext context) {

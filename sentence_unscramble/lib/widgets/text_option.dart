@@ -13,6 +13,7 @@ class TextOption extends StatefulWidget {
 class _ToggleOptionState extends State<TextOption> {
   final _textController = TextEditingController();
 
+  // main build function of widget. box where user can type a number
   @override
   Widget build(BuildContext context) {
     return Container(

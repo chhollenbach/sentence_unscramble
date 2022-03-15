@@ -36,6 +36,7 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
+  // main build widget composed of many widgets, representing the landing page of the app
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +49,7 @@ class _LandingPageState extends State<LandingPage> {
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
+          // children of column consists of three rows for options and the start button
           children: [
             Text('Game Options', style: TextStyle(fontSize: 30)),
             Row(

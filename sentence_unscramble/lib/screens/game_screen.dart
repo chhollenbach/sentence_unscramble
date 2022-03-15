@@ -7,6 +7,7 @@ import 'package:http/http.dart'  as http;
 class GameScreen extends StatefulWidget {
   const GameScreen({ Key? key , required this.displayHint, required this.swapCount, required this.wordCount}) : super(key: key);
 
+  // State variables to track
   final bool displayHint;
   final int swapCount;
   final int wordCount;
@@ -36,7 +37,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-
+  // function that calls teammates microservice and sets a random sentence based on user choices
   void setSentences(wordCount) async {
     String url = 'http://10.0.2.2:3000/sentence/' + wordCount.toString();
     final response = await http.get(Uri.parse(url));
@@ -52,6 +53,7 @@ class _GameScreenState extends State<GameScreen> {
 
   }
 
+  // function to help determine if the user has won the game
   void incrementWinCond() {
     setState(() {
       winCond++;
@@ -78,7 +80,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-
+  // main build for gamescreen, composed of many widgets
   @override
   Widget build(BuildContext context) {
     return Scaffold(

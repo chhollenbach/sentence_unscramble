@@ -12,6 +12,7 @@ class ScrambledWordBox extends StatefulWidget {
 class _ScrambledWordBoxState extends State<ScrambledWordBox> {
   bool displaySelf = true;
 
+  //main build widget - represents the text box at the bottom of the game screen
   @override
   Widget build(BuildContext context) {
     return Padding(
